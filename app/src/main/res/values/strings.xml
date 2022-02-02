@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SpaceX Autenti.com</string>
+    <string name="latitude">latitude:</string>
+    <string name="longitude">longitude:</string>
+    <string name="localization">localization</string>
+    <string name="status">status:</string>
+    <string name="name">name:</string>
+    <string name="sample_text">Vandenberg Air Force Base Space Launch Complex 3W</string>
+</resources>

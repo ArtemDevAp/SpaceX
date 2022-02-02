@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_grapg"
+    app:startDestination="@id/launchpadFragment">
+
+    <fragment
+        android:id="@+id/launchpadFragment"
+        android:name="com.artem.mi.spacexautenticom.ui.launchpad.LaunchpadFragment"
+        android:label="Launchpads"
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_launchpadFragment_to_launchpadDetailFragment"
+            app:destination="@id/launchpadDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/launchpadDetailFragment"
+        android:name="com.artem.mi.spacexautenticom.ui.launchpadDetail.LaunchpadDetailFragment"
+        android:label="Launchpad detail"
+        tools:layout="@layout/launchpad_detail_fragment" >
+        <argument
+            android:name="siteId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>
