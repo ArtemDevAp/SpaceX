@@ -9,10 +9,10 @@
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_load"
         android:layout_width="wrap_content"
-        android:theme="@style/Theme.SpaceXAutenticom"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminate="true" />
+        android:indeterminate="true"
+        android:theme="@style/Theme.SpaceXAutenticom" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/launchpad_recycler_view"

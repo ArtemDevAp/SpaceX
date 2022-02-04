@@ -9,15 +9,13 @@ import kotlinx.coroutines.launch
 
 class LaunchpadViewModel : ViewModel() {
 
-    private val launchpadRepo = LaunchpadRepo()
-
     private val _launchpadsData: MutableLiveData<LaunchpadViewModelState> = MutableLiveData()
     val launchpadsData: LiveData<LaunchpadViewModelState> = _launchpadsData
 
     init {
         viewModelScope.launch {
             runCatching {
-                launchpadRepo.fetchLaunchpads()
+                LaunchpadRepo.fetchLaunchpads()
             }.onSuccess { launchpads ->
                 _launchpadsData.postValue(LaunchpadViewModelState(launchpads = launchpads))
             }.onFailure {

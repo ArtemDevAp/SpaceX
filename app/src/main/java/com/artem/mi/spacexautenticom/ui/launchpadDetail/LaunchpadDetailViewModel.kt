@@ -14,8 +14,6 @@ class LaunchpadDetailViewModel(
     private val siteId: String?
 ) : ViewModel() {
 
-    private val launchpadRepo = LaunchpadRepo()
-
     private val _detailLaunchpad: MutableLiveData<LaunchpadDetailData> =
         MutableLiveData()
     val detailLaunchpad: LiveData<LaunchpadDetailData> = _detailLaunchpad
@@ -23,7 +21,7 @@ class LaunchpadDetailViewModel(
     init {
         viewModelScope.launch {
             siteId?.let { siteId ->
-                when (val result = launchpadRepo.fetchDetailLaunchpad(siteId)) {
+                when (val result = LaunchpadRepo.fetchDetailLaunchpad(siteId)) {
                     is ApiResponse.Success -> {
                         result.data.let { detail ->
                             _detailLaunchpad.postValue(detail)
