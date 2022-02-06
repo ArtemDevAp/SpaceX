@@ -6,7 +6,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ISpaceXClient {
+interface ISpaceXLaunchpadClient {
 
     @GET("launchpads")
     suspend fun fetchLaunchpads(): List<LaunchpadData>

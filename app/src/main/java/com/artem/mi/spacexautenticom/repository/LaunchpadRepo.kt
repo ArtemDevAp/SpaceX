@@ -7,7 +7,7 @@ import com.artem.mi.spacexautenticom.model.ApiResponse
 import com.artem.mi.spacexautenticom.model.ErrorResponse
 import com.artem.mi.spacexautenticom.model.LaunchpadData
 import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
-import com.artem.mi.spacexautenticom.network.ISpaceXClient
+import com.artem.mi.spacexautenticom.network.ISpaceXLaunchpadClient
 import com.artem.mi.spacexautenticom.preload.IPreload
 import com.squareup.moshi.Moshi
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class LaunchpadRepo @Inject constructor(
     private val launchpadCache: LaunchpadCache,
     private val launchpadDetailCache: LaunchpadDetailCache,
-    private val iSpaceXClient: ISpaceXClient,
+    private val iSpaceXClient: ISpaceXLaunchpadClient,
     private val moshi: Moshi
 ) : IPreload {
 
