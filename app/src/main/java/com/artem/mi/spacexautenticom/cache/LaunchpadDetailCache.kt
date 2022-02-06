@@ -1,18 +1,43 @@
 package com.artem.mi.spacexautenticom.cache
 
-import android.util.Log
 import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
 
-object LaunchpadDetailCache {
+class LaunchpadDetailCache : IHasMapCache<LaunchpadDetailData> {
+
+    private var updateTime: Long = 0L
+
+    companion object {
+        private const val lifeTime: Long = 10_000L
+    }
 
     private val launchpadDetailData: HashMap<String, LaunchpadDetailData> = HashMap()
 
-    fun getLaunchpadDetail(suiteId: String): LaunchpadDetailData? =
-        launchpadDetailData[suiteId]
+    override val isExpired: Boolean
+        get() = (System.currentTimeMillis() - updateTime) > lifeTime
 
-    fun setLaunchpadDetail(suiteId: String, launchpadDetailData: LaunchpadDetailData) {
-        Log.v("APP", "set data preload")
-        this.launchpadDetailData[suiteId] = launchpadDetailData
+    override val isEmpty: Boolean
+        get() = launchpadDetailData.isEmpty()
+
+    override fun get(key: String): LaunchpadDetailData? {
+        return launchpadDetailData[key]
     }
+
+    override fun add(key: String, item: LaunchpadDetailData) {
+        launchpadDetailData[key] = item
+        updateTime = System.currentTimeMillis()
+    }
+
+    override fun remove(key: String) {
+        launchpadDetailData.remove(key)
+    }
+
+    override fun clear() {
+        launchpadDetailData.clear()
+    }
+
+    override fun hasKey(key: String): Boolean {
+        return launchpadDetailData.containsKey(key)
+    }
+
 
 }

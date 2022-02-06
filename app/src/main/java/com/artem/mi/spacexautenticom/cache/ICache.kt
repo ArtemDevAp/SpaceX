@@ -4,6 +4,8 @@ interface ICache<T> {
 
     val isExpired: Boolean
 
+    val isEmpty: Boolean
+
     fun add(item: T)
 
     fun addAll(items: List<T>)
@@ -15,7 +17,5 @@ interface ICache<T> {
     fun clear()
 
     fun getAll(): List<T>
-
-    val isEmpty: Boolean
 
 }

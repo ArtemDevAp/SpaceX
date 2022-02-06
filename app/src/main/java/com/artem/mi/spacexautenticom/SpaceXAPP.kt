@@ -5,12 +5,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.artem.mi.spacexautenticom.repository.LaunchpadRepo
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class SpaceXAPP(
-    //inject repo
-    //private var preload : List<IPreload>
-) : Application(), LifecycleEventObserver {
+@HiltAndroidApp
+class SpaceXAPP : Application(), LifecycleEventObserver {
+
+    @Inject
+    lateinit var launchpadRepo: LaunchpadRepo
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
@@ -21,7 +24,7 @@ class SpaceXAPP(
 //                preload.forEach {
 //                    it.run()
 //                }
-                LaunchpadRepo.fetchLaunchpads()
+                launchpadRepo.fetchLaunchpads()
             }
         }
     }

@@ -7,14 +7,22 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.artem.mi.spacexautenticom.R
 import com.google.android.material.textview.MaterialTextView
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LaunchpadDetailFragment : Fragment(R.layout.launchpad_detail_fragment) {
+
+    @Inject
+    lateinit var factory: LaunchpadDetailViewModel.LaunchpadDetailViewModelHiltFactory
 
     private val args: LaunchpadDetailFragmentArgs by navArgs()
 
-    private val viewModel: LaunchpadDetailViewModel by viewModels {
-        LaunchpadDetailViewModelFactory(args.siteId)
+    private val viewModel: LaunchpadDetailViewModel by viewModels{
+        LaunchpadDetailViewModel.provideFactory(factory, args.siteId)
     }
+       // LaunchpadDetailViewModel.provideFactory(factory, args.sieId)
+
 
     private lateinit var fullName: MaterialTextView
     private lateinit var status: MaterialTextView

@@ -10,7 +10,9 @@ import com.artem.mi.spacexautenticom.R
 import com.artem.mi.spacexautenticom.ext.safeNavigateFromNavController
 import com.artem.mi.spacexautenticom.ext.setVisible
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LaunchpadFragment : Fragment(R.layout.main_fragment) {
 
     private val viewModel: LaunchpadViewModel by viewModels()

@@ -2,16 +2,20 @@ package com.artem.mi.spacexautenticom.network
 
 
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-object ApiClient {
+class SpaceXApiClient @Inject constructor(
+    private val moshi: Moshi
+) {
 
-    private const val SpaceX_API = "https://api.spacexdata.com/v3/"
+    companion object {
+        private const val SpaceX_API = "https://api.spacexdata.com/v3/"
+    }
 
     private val okhttp = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
@@ -21,21 +25,12 @@ object ApiClient {
         .readTimeout(15000, TimeUnit.MILLISECONDS)
         .build()
 
-    fun provideMoshi(): Moshi {
-        return Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-    }
-
-    private fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(SpaceX_API)
             .client(okhttp)
             .build()
     }
-
-    fun provideSpaceXClient(): ISpaceXClient =
-        provideRetrofit().create(ISpaceXClient::class.java)
 
 }

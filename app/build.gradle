@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id("androidx.navigation.safeargs")
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 
@@ -59,12 +60,16 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:${retrofit_version}"
-    implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.13.0"
+
+    //moshi
+    def moshi_version = "1.13.0"
+    implementation "com.squareup.moshi:moshi-kotlin:${moshi_version}"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:${moshi_version}"
 
     //androidX
-    implementation "androidx.activity:activity-ktx:1.4.0"
-    implementation "androidx.fragment:fragment-ktx:1.4.1"
+    def androidX_version = "1.4.0"
+    implementation "androidx.activity:activity-ktx:${androidX_version}"
+    implementation "androidx.fragment:fragment-ktx:${androidX_version}"
 
     //OkHttp 3
     def okhttp_version = "4.9.0"
@@ -72,10 +77,17 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     //recycler
-    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    def recycler_version = "1.2.1"
+    implementation "androidx.recyclerview:recyclerview:${recycler_version}"
 
     //navigation ui
     def nav_version = "2.4.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //hilt
+    def hilt_version = "2.40.5"
+    def hilt_compiler_version = "2.38.1"
+    implementation "com.google.dagger:hilt-android:${hilt_version}"
+    kapt "com.google.dagger:hilt-compiler:${hilt_compiler_version}"
 }
