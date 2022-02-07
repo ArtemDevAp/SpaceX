@@ -44,7 +44,6 @@ class LaunchpadDetailViewModel @AssistedInject constructor(
         fun create(suiteId: String?): LaunchpadDetailViewModel
     }
 
-
     companion object {
         fun provideFactory(
             launchpadDetailViewModelHiltFactory: LaunchpadDetailViewModelHiltFactory,

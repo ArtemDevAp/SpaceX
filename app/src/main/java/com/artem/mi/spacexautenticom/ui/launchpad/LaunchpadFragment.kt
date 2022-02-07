@@ -1,21 +1,25 @@
 package com.artem.mi.spacexautenticom.ui.launchpad
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import com.artem.mi.spacexautenticom.R
+import com.artem.mi.spacexautenticom.databinding.LauchpadFragmentBinding
 import com.artem.mi.spacexautenticom.ext.safeNavigateFromNavController
 import com.artem.mi.spacexautenticom.ext.setVisible
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LaunchpadFragment : Fragment(R.layout.main_fragment) {
+class LaunchpadFragment : Fragment() {
 
     private val viewModel: LaunchpadViewModel by viewModels()
+
+    private var _binding: LauchpadFragmentBinding? = null
+
+    private val binding = _binding!!
 
     private val launchpadAdapter by lazy {
         LaunchpadAdapter { suiteId ->
@@ -27,17 +31,22 @@ class LaunchpadFragment : Fragment(R.layout.main_fragment) {
         }
     }
 
-    private lateinit var progress: CircularProgressIndicator
-    private lateinit var recyclerView: RecyclerView
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = LauchpadFragmentBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.launchpad_recycler_view)
-        progress = view.findViewById(R.id.progress_load)
-
-        recyclerView.adapter = launchpadAdapter
-        recyclerView.setHasFixedSize(true)
+        binding.launchpadRecyclerView.run {
+            setHasFixedSize(true)
+            adapter = launchpadAdapter
+        }
 
         viewModel.launchpadsData.observe(viewLifecycleOwner, { state ->
 
@@ -45,10 +54,11 @@ class LaunchpadFragment : Fragment(R.layout.main_fragment) {
                 Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
             }
 
-            progress.setVisible(state.launchpads.isEmpty() && state.error == null)
+            binding.progressLoad.setVisible(state.launchpads.isEmpty() && state.error == null)
 
             launchpadAdapter.submitList(state.launchpads)
         })
+
     }
 
 }

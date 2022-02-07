@@ -12,15 +12,17 @@ import com.google.android.material.textview.MaterialTextView
 
 class LaunchpadAdapter(
     private val onItemSelect: (suiteId: String) -> Unit
-) :
-    ListAdapter<LaunchpadData, LaunchpadAdapter.ViewHolder>(LaunchpadDiffCallback()) {
+) : ListAdapter<LaunchpadData, LaunchpadAdapter.ViewHolder>(LaunchpadDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.launchpad_item, parent, false)
 
+
+
         return ViewHolder(view, onItemSelect)
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -29,20 +31,19 @@ class LaunchpadAdapter(
     inner class ViewHolder(
         itemView: View,
         private val onItemSelect: (suiteId: String) -> Unit
-    ) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    ) : RecyclerView.ViewHolder(itemView) {
 
         private val launchpadName: MaterialTextView = itemView.findViewById(R.id.launchpad_name)
 
         init {
-            itemView.setOnClickListener(this)
+            itemView.setOnClickListener {
+                onItemSelect(getItem(absoluteAdapterPosition).site_id)
+            }
         }
 
         fun bind(item: LaunchpadData) {
             launchpadName.text = item.site_name_long
-        }
 
-        override fun onClick(p0: View?) {
-            onItemSelect(getItem(absoluteAdapterPosition).site_id)
         }
 
     }

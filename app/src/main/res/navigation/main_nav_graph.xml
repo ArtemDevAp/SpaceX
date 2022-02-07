@@ -9,7 +9,7 @@
         android:id="@+id/launchpadFragment"
         android:name="com.artem.mi.spacexautenticom.ui.launchpad.LaunchpadFragment"
         android:label="Launchpads"
-        tools:layout="@layout/main_fragment" >
+        tools:layout="@layout/lauchpad_fragment" >
         <action
             android:id="@+id/action_launchpadFragment_to_launchpadDetailFragment"
             app:destination="@id/launchpadDetailFragment" />
