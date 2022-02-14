@@ -17,7 +17,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApiModule {
+open class ApiModule {
+
+    open val provideSpaceXUrl: String = ApiConstants.SpaceX_API
 
     @Provides
     @Singleton
@@ -31,17 +33,18 @@ object ApiModule {
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
-        .connectTimeout(15000, TimeUnit.MILLISECONDS)
-        .readTimeout(15000, TimeUnit.MILLISECONDS)
+        .connectTimeout(10000, TimeUnit.MILLISECONDS)
+        .readTimeout(10000, TimeUnit.MILLISECONDS)
         .build()
 
     @Provides
     @Singleton
-    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .baseUrl(ApiConstants.SpaceX_API)
-        .client(okHttpClient)
-        .build()
+    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .baseUrl(provideSpaceXUrl)
+            .client(okHttpClient)
+            .build()
 
     @Provides
     @Singleton
