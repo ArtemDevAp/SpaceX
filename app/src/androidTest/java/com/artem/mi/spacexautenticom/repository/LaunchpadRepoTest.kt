@@ -82,7 +82,7 @@ class LaunchpadRepoTest {
         val expectedMessage = "End of input"
         val actualMessage = exception.message
 
-        Assert.assertTrue(expectedMessage == actualMessage)
+        assertTrue(expectedMessage == actualMessage)
     }
 
     @After

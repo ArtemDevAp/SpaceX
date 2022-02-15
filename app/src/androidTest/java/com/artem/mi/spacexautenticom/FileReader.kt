@@ -1,6 +1,5 @@
 package com.artem.mi.spacexautenticom
 
-import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import java.io.IOException
 import java.io.InputStreamReader
@@ -9,7 +8,7 @@ object FileReader {
 
     fun readStringFile(fileName: String): String {
         try {
-            val inputStream = getInstrumentation().targetContext.resources.assets.open(fileName);
+            val inputStream = getInstrumentation().targetContext.resources.assets.open(fileName)
             return StringBuilder().apply {
                 InputStreamReader(inputStream, "UTF-8").use {
                     it.readLines().forEach { data ->
