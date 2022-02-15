@@ -19,7 +19,7 @@ class LaunchpadFragment : Fragment() {
 
     private var _binding: LauchpadFragmentBinding? = null
 
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     private val launchpadAdapter by lazy {
         LaunchpadAdapter { suiteId ->
@@ -35,9 +35,9 @@ class LaunchpadFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = LauchpadFragmentBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
