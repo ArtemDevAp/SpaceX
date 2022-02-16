@@ -21,9 +21,6 @@ class SpaceXAPP : Application(), LifecycleEventObserver {
         super.onCreate()
         scope.launch {
             runCatching {
-//                preload.forEach {
-//                    it.run()
-//                }
                 launchpadRepo.fetchLaunchpads()
             }
         }
