@@ -5,21 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.artem.mi.spacexautenticom.databinding.LauchpadFragmentBinding
 import com.artem.mi.spacexautenticom.ext.safeNavigateFromNavController
 import com.artem.mi.spacexautenticom.ext.setVisible
+import com.artem.mi.spacexautenticom.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LaunchpadFragment : Fragment() {
+class LaunchpadFragment : BaseFragment<LauchpadFragmentBinding>() {
 
     private val viewModel: LaunchpadViewModel by viewModels()
-
-    private var _binding: LauchpadFragmentBinding? = null
-
-    private val binding get() = _binding!!
 
     private val launchpadAdapter by lazy {
         LaunchpadAdapter { suiteId ->
@@ -31,14 +27,11 @@ class LaunchpadFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
+    override fun initBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = LauchpadFragmentBinding.inflate(layoutInflater, container, false)
-        return _binding?.root
-    }
+        container: ViewGroup?
+    ): LauchpadFragmentBinding =
+        LauchpadFragmentBinding.inflate(layoutInflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

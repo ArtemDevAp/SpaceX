@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.artem.mi.spacexautenticom.databinding.LaunchpadDetailFragmentBinding
+import com.artem.mi.spacexautenticom.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LaunchpadDetailFragment : Fragment() {
+class LaunchpadDetailFragment : BaseFragment<LaunchpadDetailFragmentBinding>() {
 
     @Inject
     lateinit var factory: LaunchpadDetailViewModel.LaunchpadDetailViewModelHiltFactory
@@ -23,18 +23,11 @@ class LaunchpadDetailFragment : Fragment() {
         LaunchpadDetailViewModel.provideFactory(factory, args.siteId)
     }
 
-    private var _binding: LaunchpadDetailFragmentBinding? = null
-
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+    override fun initBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = LaunchpadDetailFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        container: ViewGroup?
+    ): LaunchpadDetailFragmentBinding =
+        LaunchpadDetailFragmentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,8 +40,4 @@ class LaunchpadDetailFragment : Fragment() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
