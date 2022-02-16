@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LaunchpadViewModel @Inject constructor(
-    launchpadRepo: LaunchpadRepo
+    private val launchpadRepo: LaunchpadRepo
 ) : ViewModel() {
 
     private val _launchpadsData: MutableLiveData<LaunchpadViewModelState> = MutableLiveData()
