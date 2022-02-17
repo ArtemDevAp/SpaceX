@@ -34,8 +34,8 @@ class LaunchpadDetailFragment : BaseFragment<LaunchpadDetailFragmentBinding>() {
         viewModel.detailLaunchpad.observe(viewLifecycleOwner, { detail ->
             binding.fullName.text = detail.site_name_long
             binding.status.text = detail.status
-            binding.localizationLatitude.text = detail.location.latitude.toString()
-            binding.localizationLongitude.text = detail.location.longitude.toString()
+            binding.localizationLatitude.text = detail.location!!.latitude.toString()
+            binding.localizationLongitude.text = detail.location!!.longitude.toString()
         })
 
     }

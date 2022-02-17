@@ -4,7 +4,6 @@ import com.artem.mi.spacexautenticom.cache.LaunchpadCache
 import com.artem.mi.spacexautenticom.cache.LaunchpadDetailCache
 import com.artem.mi.spacexautenticom.network.ISpaceXLaunchpadClient
 import com.artem.mi.spacexautenticom.repository.LaunchpadRepo
-import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,13 +19,11 @@ object RepositoryModule {
     fun provideLaunchpadRepo(
         launchpadCache: LaunchpadCache,
         launchpadDetailCache: LaunchpadDetailCache,
-        apiClient: ISpaceXLaunchpadClient,
-        moshi: Moshi
+        apiClient: ISpaceXLaunchpadClient
     ): LaunchpadRepo = LaunchpadRepo(
         launchpadCache = launchpadCache,
         launchpadDetailCache = launchpadDetailCache,
-        iSpaceXClient = apiClient,
-        moshi = moshi
+        iSpaceXClient = apiClient
     )
 
 }
