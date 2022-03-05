@@ -58,7 +58,7 @@ class LaunchpadRepoTest {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return MockResponse()
                     .setResponseCode(200)
-                    .setBody(FileReader.readStringFile("success_response.json"))
+                    .setBody(FileReader.readStringFile())
             }
         }
 

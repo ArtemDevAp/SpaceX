@@ -1,23 +1,19 @@
 package com.artem.mi.spacexautenticom
 
+
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 
 object FileReader {
 
-    fun readStringFile(fileName: String): String {
+    fun readStringFile(): String {
         try {
-            val inputStream = getInstrumentation().targetContext.resources.assets.open(fileName)
-            return StringBuilder().apply {
-                InputStreamReader(inputStream, "UTF-8").use {
-                    it.readLines().forEach { data ->
-                        append(data)
-                    }
-                }
-            }.toString()
+            return getInstrumentation().targetContext.resources.openRawResource(R.raw.success_response)
+                .bufferedReader().use(BufferedReader::readText)
         } catch (e: IOException) {
             throw e
         }
+
     }
 }

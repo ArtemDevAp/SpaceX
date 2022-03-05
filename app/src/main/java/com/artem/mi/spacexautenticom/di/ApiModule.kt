@@ -1,6 +1,5 @@
 package com.artem.mi.spacexautenticom.di
 
-import com.artem.mi.spacexautenticom.constant.ApiConstants
 import com.artem.mi.spacexautenticom.network.ISpaceXLaunchpadClient
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -19,7 +18,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 open class ApiModule {
 
-    open val provideSpaceXUrl: String = ApiConstants.SpaceX_API
+    private companion object {
+        const val BASE_URL = "https://api.spacexdata.com/v3/"
+    }
+
+    open fun setBaseUrl(baseUrl: String = BASE_URL): String = baseUrl
 
     @Provides
     @Singleton
@@ -42,7 +45,7 @@ open class ApiModule {
     fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(provideSpaceXUrl)
+            .baseUrl(setBaseUrl())
             .client(okHttpClient)
             .build()
 
@@ -50,4 +53,5 @@ open class ApiModule {
     @Singleton
     fun provideSpaceXClient(retrofit: Retrofit): ISpaceXLaunchpadClient =
         retrofit.create(ISpaceXLaunchpadClient::class.java)
+
 }

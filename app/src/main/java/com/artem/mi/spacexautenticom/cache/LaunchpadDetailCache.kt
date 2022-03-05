@@ -39,5 +39,4 @@ class LaunchpadDetailCache : IHasMapCache<LaunchpadDetailData> {
         return launchpadDetailData.containsKey(key)
     }
 
-
 }
