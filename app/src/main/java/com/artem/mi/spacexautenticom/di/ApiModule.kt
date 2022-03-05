@@ -22,7 +22,7 @@ open class ApiModule {
         const val BASE_URL = "https://api.spacexdata.com/v3/"
     }
 
-    open fun setBaseUrl(baseUrl: String = BASE_URL): String = baseUrl
+    open fun provideSpaceXUrl(baseUrl: String = BASE_URL): String = baseUrl
 
     @Provides
     @Singleton
@@ -45,7 +45,7 @@ open class ApiModule {
     fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(setBaseUrl())
+            .baseUrl(provideSpaceXUrl())
             .client(okHttpClient)
             .build()
 
