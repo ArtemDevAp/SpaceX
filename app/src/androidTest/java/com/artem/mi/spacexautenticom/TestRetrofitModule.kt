@@ -12,7 +12,7 @@ import dagger.hilt.testing.TestInstallIn
 )
 class TestRetrofitModule : ApiModule() {
 
-    override fun setBaseUrl(baseUrl: String): String {
+    override fun provideSpaceXUrl(baseUrl: String): String {
         return "http://127.0.0.1:8080"
     }
 }
