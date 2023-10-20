@@ -27,6 +27,11 @@ class LaunchpadFragment : BaseFragment<LauchpadFragmentBinding>() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.init(savedInstanceState)
+    }
+
     override fun initBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -41,7 +46,7 @@ class LaunchpadFragment : BaseFragment<LauchpadFragmentBinding>() {
             adapter = launchpadAdapter
         }
 
-        viewModel.launchpadsData.observe(viewLifecycleOwner, { state ->
+        viewModel.launchpadsData.observe(viewLifecycleOwner) { state ->
 
             if (state.error != null) {
                 Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
@@ -50,8 +55,6 @@ class LaunchpadFragment : BaseFragment<LauchpadFragmentBinding>() {
             binding.progressLoad.setVisible(state.launchpads.isEmpty() && state.error == null)
 
             launchpadAdapter.submitList(state.launchpads)
-        })
-
+        }
     }
-
 }
