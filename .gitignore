@@ -1,6 +1,21 @@
-*.iml
+# Gradle files
 .gradle
+/build
+
+# Local cinfiguration file
 /local.properties
+local.properties
+
+# Log files
+*.log
+
+# AS generated files
+.externalNativeBuild
+.cxx
+
+# IntelliJ
+*.iml
+/.idea
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -8,8 +23,7 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
 /captures
-.externalNativeBuild
-.cxx
-local.properties
+
+# APP files
+secret.properties
