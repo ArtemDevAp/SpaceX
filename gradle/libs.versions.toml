@@ -29,6 +29,7 @@ rules = "1.5.0"
 runner = "1.5.2"
 
 devtool-ksp = "1.9.10-1.0.13"
+org-jetbrains-kotlin-jvm = "1.9.10"
 
 [libraries]
 activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
@@ -67,4 +68,5 @@ rules = { module = "androidx.test:rules", version.ref = "rules" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
 
 [plugins]
-android-application = { id = "com.google.devtools.ksp", version.ref = "devtool-ksp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "devtool-ksp" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
