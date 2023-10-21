@@ -2,13 +2,14 @@
 
 import java.util.Properties
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("androidx.navigation.safeargs")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
 }
 
 val secretPropertiesFile = rootProject.file("secret.properties")
