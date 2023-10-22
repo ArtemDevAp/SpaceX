@@ -1,40 +1,35 @@
 package com.artem.mi.spacexautenticom.ui.launchpadDetail
 
-import android.util.Log
-import androidx.lifecycle.*
-import com.artem.mi.spacexautenticom.model.ApiResponse
-import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
+import android.os.Bundle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.artem.mi.spacexautenticom.repository.LaunchpadRepo
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
-
 class LaunchpadDetailViewModel @AssistedInject constructor(
-    @Assisted private val siteId: String?,
-    private val launchpadRepo: LaunchpadRepo
+    @Assisted private val siteId: String,
+    private val launchpadRepo: LaunchpadRepo,
+    private val uiMapper: LaunchpadDetailUiMapper
 ) : ViewModel() {
 
+    private val _detailLaunchpad = MutableStateFlow<LaunchpadViewState>(LaunchpadViewState.Loading)
+    val detailLaunchpad = _detailLaunchpad.asStateFlow()
 
-    private val _detailLaunchpad: MutableLiveData<LaunchpadDetailData> =
-        MutableLiveData()
-    val detailLaunchpad: LiveData<LaunchpadDetailData> = _detailLaunchpad
-
-    init {
+    fun init(bundle: Bundle?) {
+        if (bundle != null) return
         viewModelScope.launch {
-            siteId?.let { siteId ->
-                when (val result = launchpadRepo.fetchDetailLaunchpad(siteId)) {
-                    is ApiResponse.Success -> {
-                        result.data.let { detail ->
-                            _detailLaunchpad.postValue(detail)
-                        }
-                    }
-                    is ApiResponse.Error -> {
-                        Log.v("APP", "error ${result.errorResponse.error}")
-                    }
-                }
+            siteId.let { siteId ->
+                val result = launchpadRepo.fetchDetailLaunchpad(siteId)
+                val detailUi = uiMapper.map(result)
+                _detailLaunchpad.update { detailUi }
             }
         }
     }
@@ -56,8 +51,6 @@ class LaunchpadDetailViewModel @AssistedInject constructor(
 
                 throw UnknownHostException("unknown class cast")
             }
-
         }
     }
-
 }

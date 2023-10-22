@@ -8,6 +8,7 @@ import com.artem.mi.spacexautenticom.model.LaunchpadData
 import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
 import com.artem.mi.spacexautenticom.network.ISpaceXLaunchpadClient
 import com.artem.mi.spacexautenticom.preload.IPreload
+import java.util.concurrent.CancellationException
 import javax.inject.Inject
 
 
@@ -27,8 +28,7 @@ class LaunchpadRepo @Inject constructor(
         }
     }
 
-    suspend fun fetchDetailLaunchpad(siteId: String):
-            ApiResponse<LaunchpadDetailData, ErrorResponse> {
+    suspend fun fetchDetailLaunchpad(siteId: String): ApiResponse<LaunchpadDetailData, ErrorResponse> {
         return try {
 
             if (launchpadDetailCache.isExpired) launchpadDetailCache.clear()
@@ -40,6 +40,8 @@ class LaunchpadRepo @Inject constructor(
             ApiResponse.Success(iSpaceXClient.fetchDetailLaunchpad(siteId).apply {
                 launchpadDetailCache.add(siteId, this)
             })
+        } catch (cancellationException: CancellationException) {
+            throw cancellationException
         } catch (t: Throwable) {
             ApiResponse.Error(ErrorResponse(t.localizedMessage ?: "error read error"))
         }
