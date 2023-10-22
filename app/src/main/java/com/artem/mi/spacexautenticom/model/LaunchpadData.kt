@@ -22,6 +22,3 @@ data class Location(
 
 @JsonClass(generateAdapter = true)
 data class ErrorResponse(val error: String)
-
-
-

@@ -1,63 +1,40 @@
 package com.artem.mi.spacexautenticom.ui.launchpadDetail
 
-import android.util.Log
-import androidx.lifecycle.*
-import com.artem.mi.spacexautenticom.model.ApiResponse
-import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
-import com.artem.mi.spacexautenticom.repository.LaunchpadRepo
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.artem.mi.spacexautenticom.repository.LaunchpadRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.net.UnknownHostException
+import javax.inject.Inject
 
-
-class LaunchpadDetailViewModel @AssistedInject constructor(
-    @Assisted private val siteId: String?,
-    private val launchpadRepo: LaunchpadRepo
+@HiltViewModel
+class LaunchpadDetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val launchpadRepository: LaunchpadRepository,
+    private val uiMapper: LaunchpadDetailUiMapper
 ) : ViewModel() {
 
+    private val siteId = savedStateHandle.get<String>(SITE_ID_KEY)
 
-    private val _detailLaunchpad: MutableLiveData<LaunchpadDetailData> =
-        MutableLiveData()
-    val detailLaunchpad: LiveData<LaunchpadDetailData> = _detailLaunchpad
+    private val mutableDetailLaunchpad =
+        MutableStateFlow<LaunchpadViewState>(LaunchpadViewState.Loading)
+    val detailLaunchpad = mutableDetailLaunchpad.asStateFlow()
 
-    init {
+    fun init(firstStart: Boolean) {
+        if (!firstStart) return
         viewModelScope.launch {
-            siteId?.let { siteId ->
-                when (val result = launchpadRepo.fetchDetailLaunchpad(siteId)) {
-                    is ApiResponse.Success -> {
-                        result.data.let { detail ->
-                            _detailLaunchpad.postValue(detail)
-                        }
-                    }
-                    is ApiResponse.Error -> {
-                        Log.v("APP", "error ${result.errorResponse.error}")
-                    }
-                }
-            }
+            require(siteId != null) { "LaunchpadDetailViewModel must contain siteId extra" }
+            val result = launchpadRepository.fetchDetailLaunchpad(siteId)
+            val detailUi = uiMapper.map(result)
+            mutableDetailLaunchpad.update { detailUi }
         }
     }
 
-    @AssistedFactory
-    interface LaunchpadDetailViewModelHiltFactory {
-        fun create(suiteId: String?): LaunchpadDetailViewModel
+    private companion object {
+        const val SITE_ID_KEY = "siteId"
     }
-
-    companion object {
-        fun provideFactory(
-            launchpadDetailViewModelHiltFactory: LaunchpadDetailViewModelHiltFactory,
-            suiteId: String?
-        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(LaunchpadDetailViewModel::class.java)) {
-                    return launchpadDetailViewModelHiltFactory.create(suiteId) as T
-                }
-
-                throw UnknownHostException("unknown class cast")
-            }
-
-        }
-    }
-
 }

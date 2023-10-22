@@ -33,9 +33,11 @@ open class ApiModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        })
+        .addInterceptor(
+            HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+        )
         .connectTimeout(10000, TimeUnit.MILLISECONDS)
         .readTimeout(10000, TimeUnit.MILLISECONDS)
         .build()
@@ -53,5 +55,4 @@ open class ApiModule {
     @Singleton
     fun provideSpaceXClient(retrofit: Retrofit): ISpaceXLaunchpadClient =
         retrofit.create(ISpaceXLaunchpadClient::class.java)
-
 }

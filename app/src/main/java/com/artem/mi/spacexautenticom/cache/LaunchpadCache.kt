@@ -44,5 +44,4 @@ class LaunchpadCache : ICache<LaunchpadData> {
     override fun getAll(): List<LaunchpadData> {
         return launchpadDetailData
     }
-
 }

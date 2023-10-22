@@ -1,43 +1,40 @@
 package com.artem.mi.spacexautenticom.ui.launchpadDetail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
+import androidx.lifecycle.Lifecycle
+import com.artem.mi.spacexautenticom.R
 import com.artem.mi.spacexautenticom.databinding.LaunchpadDetailFragmentBinding
-import com.artem.mi.spacexautenticom.ui.BaseFragment
+import com.artem.mi.spacexautenticom.ui.common.collectWithLifecycleState
+import com.artem.mi.spacexautenticom.ui.common.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class LaunchpadDetailFragment : BaseFragment<LaunchpadDetailFragmentBinding>() {
+class LaunchpadDetailFragment : Fragment(R.layout.launchpad_detail_fragment) {
 
-    @Inject
-    lateinit var factory: LaunchpadDetailViewModel.LaunchpadDetailViewModelHiltFactory
+    private val binding by viewBinding(LaunchpadDetailFragmentBinding::bind)
 
-    private val args: LaunchpadDetailFragmentArgs by navArgs()
+    private val viewModel: LaunchpadDetailViewModel by viewModels()
 
-    private val viewModel: LaunchpadDetailViewModel by viewModels {
-        LaunchpadDetailViewModel.provideFactory(factory, args.siteId)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.init(savedInstanceState == null)
     }
-
-    override fun initBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): LaunchpadDetailFragmentBinding =
-        LaunchpadDetailFragmentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.detailLaunchpad.observe(viewLifecycleOwner, { detail ->
-            binding.fullName.text = detail.site_name_long
-            binding.status.text = detail.status
-            binding.localizationLatitude.text = detail.location!!.latitude.toString()
-            binding.localizationLongitude.text = detail.location!!.longitude.toString()
-        })
-
+        collectWithLifecycleState(Lifecycle.State.STARTED) {
+            viewModel.detailLaunchpad.collectLatest { detail ->
+                detail.apply(
+                    fullName = binding.fullName,
+                    status = binding.status,
+                    lat = binding.localizationLatitude,
+                    lng = binding.localizationLongitudeText
+                )
+            }
+        }
     }
-
 }

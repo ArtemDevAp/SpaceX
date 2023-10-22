@@ -66,51 +66,52 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
 
-    //testing
+    // testing
     androidTestImplementation(libs.runner)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.rules)
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.junit.ext)
+    testImplementation(libs.jetbrains.kotlinx.coroutines.test)
 
-    //mock server
+    // mock server
     androidTestImplementation(libs.mockwebserver)
 
-    //Retrofit 2
+    // retrofit 2
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
 
-    //moshi
+    // moshi
     implementation(libs.moshi.kotlin)
     ksp(libs.moshi.kotlin.codegen)
 
-    //view
+    // view
     implementation(libs.constraintlayout)
     implementation(libs.material)
 
-    //lifecycle
+    // lifecycle
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
 
-    //androidX
+    // androidX
     implementation(libs.activity.ktx)
     implementation(libs.fragment.ktx)
 
-    //OkHttp 3
+    // OkHttp 3
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
     androidTestImplementation(libs.okhttp3.idling.resource)
 
-    //recycler
+    // recycler
     implementation(libs.recyclerview)
 
-    //navigation ui
+    // navigation ui
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.testing)
 
-    //hilt
+    // hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)

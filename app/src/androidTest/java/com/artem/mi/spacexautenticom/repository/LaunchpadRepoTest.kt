@@ -12,14 +12,17 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
-import org.junit.*
+import org.junit.After
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.FixMethodOrder
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runners.MethodSorters
 import java.io.EOFException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @HiltAndroidTest
@@ -32,7 +35,7 @@ class LaunchpadRepoTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Inject
-    lateinit var launchpadRepo: LaunchpadRepo
+    lateinit var launchpadRepo: LaunchpadRepository
 
     @Inject
     lateinit var okHttpClient: OkHttpClient
