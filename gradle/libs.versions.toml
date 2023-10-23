@@ -14,6 +14,7 @@ hilt-android-compiler = "2.47"
 hilt-android-gradle-plugin = "2.47"
 hilt-android-testing = "2.47"
 hilt-compiler = "2.47"
+jetbrains-kotlinx-coroutines-test = "1.7.3"
 junit = "1.1.5"
 junit-junit = "4.13.2"
 kotlin = "1.9.10"
@@ -50,6 +51,7 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt-android-gradle-plugin" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-android-testing" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-compiler" }
+jetbrains-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "jetbrains-kotlinx-coroutines-test" }
 junit-ext = { module = "androidx.test.ext:junit", version.ref = "junit" }
 junit-junit = { module = "junit:junit", version.ref = "junit-junit" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin"}

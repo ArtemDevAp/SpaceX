@@ -73,6 +73,7 @@ dependencies {
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.junit.ext)
+    testImplementation(libs.jetbrains.kotlinx.coroutines.test)
 
     //mock server
     androidTestImplementation(libs.mockwebserver)

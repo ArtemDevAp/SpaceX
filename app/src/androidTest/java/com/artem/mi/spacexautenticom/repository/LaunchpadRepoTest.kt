@@ -32,7 +32,7 @@ class LaunchpadRepoTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Inject
-    lateinit var launchpadRepo: LaunchpadRepo
+    lateinit var launchpadRepo: LaunchpadRepository
 
     @Inject
     lateinit var okHttpClient: OkHttpClient

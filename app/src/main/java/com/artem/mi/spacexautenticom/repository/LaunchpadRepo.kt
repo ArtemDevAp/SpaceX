@@ -11,14 +11,18 @@ import com.artem.mi.spacexautenticom.preload.IPreload
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
 
+interface LaunchpadRepository {
+    suspend fun fetchLaunchpads(): List<LaunchpadData>
+    suspend fun fetchDetailLaunchpad(siteId: String): ApiResponse<LaunchpadDetailData, ErrorResponse>
+}
 
-class LaunchpadRepo @Inject constructor(
+class LaunchpadRepositoryImpl @Inject constructor(
     private val launchpadCache: LaunchpadCache,
     private val launchpadDetailCache: LaunchpadDetailCache,
     private val iSpaceXClient: ISpaceXLaunchpadClient
-) : IPreload {
+) : IPreload, LaunchpadRepository {
 
-    suspend fun fetchLaunchpads(): List<LaunchpadData> {
+    override suspend fun fetchLaunchpads(): List<LaunchpadData> {
         return if (!launchpadCache.isExpired) {
             launchpadCache.getAll()
         } else {
@@ -28,7 +32,7 @@ class LaunchpadRepo @Inject constructor(
         }
     }
 
-    suspend fun fetchDetailLaunchpad(siteId: String): ApiResponse<LaunchpadDetailData, ErrorResponse> {
+    override suspend fun fetchDetailLaunchpad(siteId: String): ApiResponse<LaunchpadDetailData, ErrorResponse> {
         return try {
 
             if (launchpadDetailCache.isExpired) launchpadDetailCache.clear()
