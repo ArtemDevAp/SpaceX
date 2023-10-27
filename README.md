@@ -11,7 +11,7 @@ After 2 years, i'm looking for a new job, to present my skills, I decide to refa
 
 master - main branch created in 2021
 
-refactor - breanch for refactoring created in 2023	
+refactor - branch for refactoring created in 2023	
 
 ref/* - separate branches to refactor
 
