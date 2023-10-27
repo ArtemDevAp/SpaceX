@@ -1,6 +1,10 @@
 name: Android Lint Check
 
-on: pull_request
+on:
+  push:
+    branches:
+    - refactor/*
+    - ref/*
 
 jobs:
   build:
