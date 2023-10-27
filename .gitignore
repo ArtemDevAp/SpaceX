@@ -1,10 +1,13 @@
-# Gradle files
-.gradle
+# Generated files
 /build
-/gradle/wrapper
-/gradlew
+bin/
+gen/
+out/
 
-# Local cinfiguration file
+# Gradle file
+.gradle
+
+# Local cinfiguration files
 /local.properties
 local.properties
 
@@ -29,3 +32,7 @@ local.properties
 
 # APP files
 secret.properties
+
+# Eclipse project files
+.classpath
+.project
