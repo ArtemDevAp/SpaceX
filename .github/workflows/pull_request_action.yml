@@ -1,0 +1,16 @@
+name: Android Lint Check
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v3.10.0
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: KtLint check
+        run: bash ./gradlew ktlintCheck
