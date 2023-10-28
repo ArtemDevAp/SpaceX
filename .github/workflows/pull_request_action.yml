@@ -3,20 +3,20 @@ name: Android Lint Check
 on:
   push:
     branches:
-    - refactor/*
-    - ref/*
+      - refactor/*
+      - ref/*
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Load secret.properties from secret
-        run: echo "${{secret.LOCAL_PROPERTIES}}" > $GITHUB_WORKSPACE/secret.properties
       - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v3.10.0
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Load secret.properties from secret
+        run: echo "${{secrets.LOCAL_PROPERTIES }}" > $GITHUB_WORKSPACE/secret.properties
       - name: KtLint check
         run: bash ./gradlew ktlintCheck
