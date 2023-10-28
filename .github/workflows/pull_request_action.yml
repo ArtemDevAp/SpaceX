@@ -16,5 +16,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Load secret.properties from secret
+        run: echo "${{secret.LOCAL_PROPERTIES}}" > $GITHUB_WORKSPACE/secret.properties
       - name: KtLint check
         run: bash ./gradlew ktlintCheck
