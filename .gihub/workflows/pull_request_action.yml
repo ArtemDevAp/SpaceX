@@ -9,6 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Load secret.properties from secret
+        run: echo "${{secret.LOCAL_PROPERTIES}}" > $GITHUB_WORKSPACE/secret.properties
       - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v3.10.0
