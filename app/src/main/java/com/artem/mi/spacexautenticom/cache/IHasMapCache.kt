@@ -15,5 +15,4 @@ interface IHasMapCache<T> {
     fun remove(key: String)
 
     fun clear()
-
 }

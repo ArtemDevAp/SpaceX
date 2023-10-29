@@ -1,5 +1,6 @@
 package com.artem.mi.spacexautenticom
 
+import javax.inject.Inject
 import android.app.Application
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -11,7 +12,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltAndroidApp
 class SpaceXAPP : Application(), LifecycleEventObserver {
@@ -37,5 +37,4 @@ class SpaceXAPP : Application(), LifecycleEventObserver {
             }
         }
     }
-
 }
