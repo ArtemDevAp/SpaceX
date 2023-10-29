@@ -38,5 +38,4 @@ class LaunchpadDetailCache : IHasMapCache<LaunchpadDetailData> {
     override fun hasKey(key: String): Boolean {
         return launchpadDetailData.containsKey(key)
     }
-
 }

@@ -19,5 +19,4 @@ object CacheModule {
     @Singleton
     @Provides
     fun provideLaunchpadDetailCache(): LaunchpadDetailCache = LaunchpadDetailCache()
-
 }

@@ -41,15 +41,16 @@ class LaunchpadRepositoryImpl @Inject constructor(
                 return ApiResponse.Success(launchpadDetailCache.get(siteId)!!)
             }
 
-            ApiResponse.Success(iSpaceXClient.fetchDetailLaunchpad(siteId).apply {
-                launchpadDetailCache.add(siteId, this)
-            })
+            ApiResponse.Success(
+                iSpaceXClient.fetchDetailLaunchpad(siteId).apply {
+                    launchpadDetailCache.add(siteId, this)
+                }
+            )
         } catch (cancellationException: CancellationException) {
             throw cancellationException
         } catch (t: Throwable) {
             ApiResponse.Error(ErrorResponse(t.localizedMessage ?: "error read error"))
         }
-
     }
 
     override suspend fun run() {

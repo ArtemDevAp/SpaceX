@@ -1,6 +1,5 @@
 package com.artem.mi.spacexautenticom
 
-
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import java.io.BufferedReader
 import java.io.IOException
@@ -14,6 +13,5 @@ object FileReader {
         } catch (e: IOException) {
             throw e
         }
-
     }
 }

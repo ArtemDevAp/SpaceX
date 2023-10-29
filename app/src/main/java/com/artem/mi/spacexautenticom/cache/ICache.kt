@@ -17,5 +17,4 @@ interface ICache<T> {
     fun clear()
 
     fun getAll(): List<T>
-
 }
