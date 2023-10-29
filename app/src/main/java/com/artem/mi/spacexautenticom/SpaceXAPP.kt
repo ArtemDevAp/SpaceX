@@ -1,21 +1,25 @@
 package com.artem.mi.spacexautenticom
 
+import javax.inject.Inject
 import android.app.Application
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.artem.mi.spacexautenticom.repository.LaunchpadRepo
+import com.artem.mi.spacexautenticom.repository.LaunchpadRepository
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.*
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 @HiltAndroidApp
 class SpaceXAPP : Application(), LifecycleEventObserver {
 
     @Inject
-    lateinit var launchpadRepo: LaunchpadRepo
+    lateinit var launchpadRepo: LaunchpadRepository
 
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val scope = CoroutineScope(SupervisorJob() + IO)
 
     override fun onCreate() {
         super.onCreate()
@@ -33,5 +37,4 @@ class SpaceXAPP : Application(), LifecycleEventObserver {
             }
         }
     }
-
 }

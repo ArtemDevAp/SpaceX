@@ -4,3 +4,4 @@ root = true
 ij_kotlin_allow_trailing_comma = false
 ij_kotlin_allow_trailing_comma_on_call_site = false
 insert_final_newline = false
+disabled_rules = import-ordering

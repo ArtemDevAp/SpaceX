@@ -1,29 +1,17 @@
 package com.artem.mi.spacexautenticom.di
 
-import com.artem.mi.spacexautenticom.cache.LaunchpadCache
-import com.artem.mi.spacexautenticom.cache.LaunchpadDetailCache
-import com.artem.mi.spacexautenticom.network.ISpaceXLaunchpadClient
-import com.artem.mi.spacexautenticom.repository.LaunchpadRepo
+import com.artem.mi.spacexautenticom.repository.LaunchpadRepository
+import com.artem.mi.spacexautenticom.repository.LaunchpadRepositoryImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module(subcomponents = [])
+@Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
-
-    @Provides
+interface RepositoryModule {
+    @Binds
     @Singleton
-    fun provideLaunchpadRepo(
-        launchpadCache: LaunchpadCache,
-        launchpadDetailCache: LaunchpadDetailCache,
-        apiClient: ISpaceXLaunchpadClient
-    ): LaunchpadRepo = LaunchpadRepo(
-        launchpadCache = launchpadCache,
-        launchpadDetailCache = launchpadDetailCache,
-        iSpaceXClient = apiClient
-    )
-
+    fun provideLaunchpadRepo(launchpadRepository: LaunchpadRepositoryImpl): LaunchpadRepository
 }

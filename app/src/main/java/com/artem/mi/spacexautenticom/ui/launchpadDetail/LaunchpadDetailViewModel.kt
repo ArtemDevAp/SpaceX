@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.artem.mi.spacexautenticom.repository.LaunchpadRepo
+import com.artem.mi.spacexautenticom.repository.LaunchpadRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -16,7 +16,7 @@ import java.net.UnknownHostException
 
 class LaunchpadDetailViewModel @AssistedInject constructor(
     @Assisted private val siteId: String,
-    private val launchpadRepo: LaunchpadRepo,
+    private val launchpadRepo: LaunchpadRepository,
     private val uiMapper: LaunchpadDetailUiMapper
 ) : ViewModel() {
 

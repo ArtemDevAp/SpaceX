@@ -31,7 +31,8 @@ subprojects {
     }
 }
 
-val detektProjectBaseline by tasks.registering(io.gitlab.arturbosch.detekt.DetektCreateBaselineTask::class) {
+typealias DetektCreateBaselineTask = io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+val detektProjectBaseline by tasks.registering(DetektCreateBaselineTask::class) {
     description = "Ovveride current baseline."
     buildUponDefaultConfig.set(true)
     ignoreFailures.set(true)
@@ -57,6 +58,7 @@ ktlint {
     verbose.set(true)
     outputToConsole.set(true)
     coloredOutput.set(true)
+    android.set(true)
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.JSON)
