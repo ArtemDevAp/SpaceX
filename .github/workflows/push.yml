@@ -1,22 +1,25 @@
-name: Android Lint Check
+name: Pull request flow
 
-on:
-  push:
-    branches:
-      - refactor/*
-      - ref/*
+on: pull_request
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v3.10.0
         with:
           distribution: 'temurin'
           java-version: '17'
+
       - name: Load secret.properties from secret
         run: echo "${{secrets.LOCAL_PROPERTIES }}" > $GITHUB_WORKSPACE/secret.properties
+
       - name: KtLint check
         run: bash ./gradlew ktlintCheck
+
+      - name: Run local tests
+        run: bash ./gradlew test
