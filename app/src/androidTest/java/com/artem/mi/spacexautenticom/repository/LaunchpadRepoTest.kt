@@ -7,6 +7,7 @@ import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.SerializationException
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -20,7 +21,6 @@ import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runners.MethodSorters
-import java.io.EOFException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -76,16 +76,16 @@ class LaunchpadRepoTest {
             }
         }
 
-        val exception: Exception = assertThrows(EOFException::class.java) {
+        val exception: Exception = assertThrows(SerializationException::class.java) {
             runBlocking {
                 launchpadRepo.fetchLaunchpads()
             }
         }
 
-        val expectedMessage = "End of input"
-        val actualMessage = exception.message
+        val expectedMessage = "EOF"
+        val actualMessage = exception.message ?: ""
 
-        assertTrue(expectedMessage == actualMessage)
+        assertTrue(actualMessage.contains(expectedMessage))
     }
 
     @After

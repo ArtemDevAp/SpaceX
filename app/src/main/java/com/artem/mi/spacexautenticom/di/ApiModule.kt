@@ -1,16 +1,17 @@
 package com.artem.mi.spacexautenticom.di
 
 import com.artem.mi.spacexautenticom.network.ISpaceXLaunchpadClient
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -26,9 +27,14 @@ open class ApiModule {
 
     @Provides
     @Singleton
-    fun provideMoshi(): Moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
+    fun provideJson() = Json {
+        ignoreUnknownKeys = true
+    }
+
+    @Provides
+    @Singleton
+    fun provideFactory(json: Json): Converter.Factory =
+        json.asConverterFactory("application/json".toMediaType())
 
     @Singleton
     @Provides
@@ -44,9 +50,9 @@ open class ApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofit(factory: Converter.Factory, okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(factory)
             .baseUrl(provideSpaceXUrl())
             .client(okHttpClient)
             .build()

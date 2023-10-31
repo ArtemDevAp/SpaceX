@@ -4,7 +4,7 @@ agp = "8.1.2"
 activity-ktx = "1.8.0"
 appcompat = "1.6.1"
 constraintlayout = "2.1.4"
-converter-moshi = "2.9.0"
+retrofit = "2.9.0"
 core-ktx = "1.12.0"
 core-testing = "2.2.0"
 espresso-core = "3.5.1"
@@ -21,7 +21,6 @@ kotlin = "1.9.10"
 lifecycle-viewmodel-ktx = "2.6.2"
 material = "1.10.0"
 mockwebserver = "4.4.0"
-moshi-kotlin = "1.13.0"
 navigation-fragment-ktx = "2.7.4"
 navigation-safe-args-gradle-plugin = "2.7.4"
 okhttp = "4.10.0"
@@ -33,6 +32,9 @@ runner = "1.5.2"
 devtool-ksp = "1.9.10-1.0.13"
 org-jetbrains-kotlin-jvm = "1.9.10"
 
+kotlinxSerializationJson = "1.6.0"
+retrofitKotlinxSerializationJson = "1.0.0"
+
 [libraries]
 android-agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 
@@ -41,7 +43,6 @@ androidx-navigation-testing = { module = "androidx.navigation:navigation-testing
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-fragment-ktx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converter-moshi" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 core-testing = { module = "androidx.arch.core:core-testing", version.ref = "core-testing" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
@@ -54,23 +55,31 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 jetbrains-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "jetbrains-kotlinx-coroutines-test" }
 junit-ext = { module = "androidx.test.ext:junit", version.ref = "junit" }
 junit-junit = { module = "junit:junit", version.ref = "junit-junit" }
-kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin"}
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mockwebserver" }
-moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi-kotlin" }
-moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi-kotlin" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
 navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigation-safe-args-gradle-plugin" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp3-idling-resource = { module = "com.jakewharton.espresso:okhttp3-idling-resource", version.ref = "okhttp3-idling-resource" }
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converter-moshi" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 rules = { module = "androidx.test:rules", version.ref = "rules" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
+
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "devtool-ksp" }
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+[bundles]
+retrofit = [
+    "retrofit",
+    "retrofit-kotlin-serialization"
+]

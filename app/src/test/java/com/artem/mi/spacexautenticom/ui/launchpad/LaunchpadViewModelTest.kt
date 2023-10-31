@@ -19,12 +19,12 @@ class LaunchpadViewModelTest {
 
     private val mockLaunchpads = listOf(
         LaunchpadData(
-            site_id = "ID",
-            site_name_long = "nameLong"
+            siteId = "ID",
+            siteNameLong = "nameLong"
         ),
         LaunchpadData(
-            site_id = "ID1",
-            site_name_long = "nameLong1"
+            siteId = "ID1",
+            siteNameLong = "nameLong1"
         )
     )
 

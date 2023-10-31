@@ -1,4 +1,4 @@
-package com.artem.mi.spacexautenticom.ext
+package com.artem.mi.spacexautenticom.core
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

@@ -21,7 +21,7 @@ class LaunchpadDetailUiMapperImpl @Inject constructor() : LaunchpadDetailUiMappe
     private fun LaunchpadDetailData.handleSuccess(): LaunchpadViewState {
         return with(this) {
             LaunchpadViewState.Data(
-                fullName = site_name_long,
+                fullName = siteNameLong,
                 status = status,
                 lat = location.latitude.toString(),
                 lng = location.longitude.toString()
