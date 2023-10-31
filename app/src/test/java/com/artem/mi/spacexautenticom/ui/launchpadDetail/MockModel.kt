@@ -12,11 +12,11 @@ val location = Location(
 val launchpadDetail = LaunchpadDetailData(
     status = "",
     location = location,
-    site_name_long = ""
+    siteNameLong = ""
 )
 
 val launchpadDataState = LaunchpadViewState.Data(
-    fullName = launchpadDetail.site_name_long,
+    fullName = launchpadDetail.siteNameLong,
     status = launchpadDetail.status,
     lat = location.latitude.toString(),
     lng = location.longitude.toString()

@@ -32,10 +32,10 @@ class LaunchpadAdapter(
 
         fun bind(item: LaunchpadData, onItemSelect: ClickListener<String>) =
             with(binding) {
-                launchpadName.text = item.site_name_long
+                launchpadName.text = item.siteNameLong
 
                 root.setOnClickListener {
-                    onItemSelect.onClick(item.site_id)
+                    onItemSelect.onClick(item.siteId)
                 }
             }
     }
@@ -47,7 +47,7 @@ class LaunchpadAdapter(
 
 private class LaunchpadDiffCallback : DiffUtil.ItemCallback<LaunchpadData>() {
     override fun areItemsTheSame(oldItem: LaunchpadData, newItem: LaunchpadData): Boolean {
-        return oldItem.site_id == newItem.site_id
+        return oldItem.siteId == newItem.siteId
     }
 
     override fun areContentsTheSame(oldItem: LaunchpadData, newItem: LaunchpadData): Boolean {

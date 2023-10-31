@@ -8,6 +8,7 @@ plugins {
     id("kotlin-android")
     id("androidx.navigation.safeargs")
     id("kotlin-kapt")
+    id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
     alias(libs.plugins.ksp)
 }
@@ -79,12 +80,7 @@ dependencies {
     androidTestImplementation(libs.mockwebserver)
 
     // retrofit 2
-    implementation(libs.retrofit)
-    implementation(libs.converter.moshi)
-
-    // moshi
-    implementation(libs.moshi.kotlin)
-    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.bundles.retrofit)
 
     // view
     implementation(libs.constraintlayout)
@@ -116,4 +112,7 @@ dependencies {
     kapt(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
     kaptAndroidTest(libs.hilt.android.compiler)
+
+    // kotlin serialization
+    implementation(libs.kotlinx.serialization.json)
 }

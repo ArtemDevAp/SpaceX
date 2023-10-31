@@ -11,5 +11,5 @@ interface ISpaceXLaunchpadClient {
     suspend fun fetchLaunchpads(): List<LaunchpadData>
 
     @GET("launchpads/{site_id}")
-    suspend fun fetchDetailLaunchpad(@Path("site_id") suite_id: String): LaunchpadDetailData
+    suspend fun fetchDetailLaunchpad(@Path("site_id") suiteId: String): LaunchpadDetailData
 }

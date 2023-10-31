@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.kotlin.serialization)
     id("io.gitlab.arturbosch.detekt") version "1.21.0"
     id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
 }

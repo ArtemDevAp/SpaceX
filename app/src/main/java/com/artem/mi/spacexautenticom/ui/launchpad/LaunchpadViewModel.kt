@@ -2,7 +2,7 @@ package com.artem.mi.spacexautenticom.ui.launchpad
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.artem.mi.spacexautenticom.ext.throttleLatest
+import com.artem.mi.spacexautenticom.core.throttleLatest
 import com.artem.mi.spacexautenticom.repository.LaunchpadRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
