@@ -11,8 +11,12 @@ After 2 years, i'm looking for a new job, to present my skills, I decide to refa
 
 master - main branch created in 2021
 
-refactor - branch for refactoring created in 2023	
+refactor - branch for refactoring
+
+develop - branch for introduce changes 
 
 ref/* - separate branches to refactor
 
-Now(27.10.2023) unit tests available not for the whole project, thay will be added during refactor. Tests presented in ref/* branches.
+features/* = branches for new features
+
+tests available in develop branch
