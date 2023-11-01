@@ -8,6 +8,8 @@ import com.artem.mi.spacexautenticom.model.LaunchpadData
 import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
 import com.artem.mi.spacexautenticom.network.ISpaceXLaunchpadClient
 import com.artem.mi.spacexautenticom.preload.IPreload
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
 
@@ -22,8 +24,8 @@ class LaunchpadRepositoryImpl @Inject constructor(
     private val iSpaceXClient: ISpaceXLaunchpadClient
 ) : IPreload, LaunchpadRepository {
 
-    override suspend fun fetchLaunchpads(): List<LaunchpadData> {
-        return if (!launchpadCache.isExpired) {
+    override suspend fun fetchLaunchpads(): List<LaunchpadData> = withContext(Dispatchers.IO) {
+        if (!launchpadCache.isExpired) {
             launchpadCache.getAll()
         } else {
             iSpaceXClient.fetchLaunchpads().apply {

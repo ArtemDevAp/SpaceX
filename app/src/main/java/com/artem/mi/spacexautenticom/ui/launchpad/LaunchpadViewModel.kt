@@ -2,46 +2,42 @@ package com.artem.mi.spacexautenticom.ui.launchpad
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.artem.mi.spacexautenticom.R
 import com.artem.mi.spacexautenticom.core.throttleLatest
-import com.artem.mi.spacexautenticom.repository.LaunchpadRepository
+import com.artem.mi.spacexautenticom.domain.FetchLaunchpadsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class LaunchpadViewModel @Inject constructor(
-    private val launchpadRepo: LaunchpadRepository
+    private val launchpadsToUI: LaunchpadToUI,
+    fetchLaunchpadsUseCase: FetchLaunchpadsUseCase
 ) : ViewModel() {
 
-    private val _launchpadsData: MutableStateFlow<LaunchpadViewModelState> =
-        MutableStateFlow(LaunchpadViewModelState.Progress)
-    val launchpadsData: StateFlow<LaunchpadViewModelState> = _launchpadsData.asStateFlow()
+    private val fetchLaunchpads =
+        fetchLaunchpadsUseCase.invoke.map { domainLaunchpads ->
+            launchpadsToUI.map(domainLaunchpads)
+        }.catch {
+            emit(LaunchpadUi.Error(R.string.something_went_wrong))
+        }
+
+    val launchpadState: StateFlow<LaunchpadUi> =
+        fetchLaunchpads
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5_000),
+                LaunchpadUi.Progress
+            )
 
     private val effectChanel: Channel<LaunchpadEffect> = Channel()
     val effect = effectChanel.receiveAsFlow().throttleLatest(EFFECT_DELAY)
-
-    fun init(firstStart: Boolean) {
-        if (!firstStart) return
-        viewModelScope.launch {
-            try {
-                val launchpads = launchpadRepo.fetchLaunchpads()
-                _launchpadsData.update { LaunchpadViewModelState.Data(launchpads = launchpads) }
-            } catch (cancellationException: CancellationException) {
-                throw cancellationException
-            } catch (e: Exception) {
-                _launchpadsData.update {
-                    LaunchpadViewModelState.Error(e.localizedMessage ?: "string res")
-                }
-            }
-        }
-    }
 
     fun onItemSelected(itemId: String) {
         effectChanel.trySend(LaunchpadEffect.NavigateToDetail(itemId))

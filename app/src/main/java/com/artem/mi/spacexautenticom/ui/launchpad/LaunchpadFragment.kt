@@ -3,6 +3,7 @@ package com.artem.mi.spacexautenticom.ui.launchpad
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -23,11 +24,6 @@ class LaunchpadFragment : Fragment(R.layout.lauchpad_fragment), Show {
     lateinit var navigator: LaunchpadNavigator
     private val binding by viewBinding(LauchpadFragmentBinding::bind)
     private val viewModel: LaunchpadViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.init(savedInstanceState == null)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,9 +47,11 @@ class LaunchpadFragment : Fragment(R.layout.lauchpad_fragment), Show {
     }
 
     private suspend fun state(showList: ShowList) {
-        viewModel.launchpadsData.collectLatest { state ->
+        viewModel.launchpadState.collectLatest { state ->
             state.apply(
                 progress = binding.progressLoad,
+                informationText = binding.informationText,
+                recyclerView = binding.launchpadRecyclerView,
                 toast = this@LaunchpadFragment,
                 loadList = showList
             )
@@ -66,7 +64,7 @@ class LaunchpadFragment : Fragment(R.layout.lauchpad_fragment), Show {
         }
     }
 
-    override fun show(msg: String) {
+    override fun show(@StringRes msg: Int) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 }

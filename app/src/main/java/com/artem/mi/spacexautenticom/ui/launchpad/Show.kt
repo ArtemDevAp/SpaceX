@@ -1,5 +1,7 @@
 package com.artem.mi.spacexautenticom.ui.launchpad
 
+import androidx.annotation.StringRes
+
 interface Show {
-    fun show(msg: String)
+    fun show(@StringRes msg: Int)
 }

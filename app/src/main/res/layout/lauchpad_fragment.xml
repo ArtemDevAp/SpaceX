@@ -6,8 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.launchpad.LaunchpadFragment">
 
+    <TextView
+        android:id="@+id/informationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/progressLoad"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_extra"
+        android:textAlignment="center"
+        android:visibility="gone"
+        tools:text="@string/tools_text" />
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progress_load"
+        android:id="@+id/progressLoad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -15,7 +28,7 @@
         android:theme="@style/Theme.SpaceXAutenticom" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/launchpad_recycler_view"
+        android:id="@+id/launchpadRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
@@ -24,7 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/launchpad_item" />
-
-
+        tools:listitem="@layout/launchpad_item"
+        tools:visibility="gone" />
 </RelativeLayout>

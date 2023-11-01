@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 fun Fragment.collectWithLifecycleState(state: Lifecycle.State, block: suspend CoroutineScope.() -> Unit) {
-    lifecycleScope.launch {
+    viewLifecycleOwner.lifecycleScope.launch {
         viewLifecycleOwner.repeatOnLifecycle(state, block)
     }
 }

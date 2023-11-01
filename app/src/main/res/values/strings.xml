@@ -6,4 +6,8 @@
     <string name="status">status:</string>
     <string name="name">name:</string>
     <string name="sample_text">Vandenberg Air Force Base Space Launch Complex 3W</string>
+
+    <string name="tools_text">Tools text</string>
+    <string name="waiting_for_network">Waiting for network…</string>
+    <string name="something_went_wrong">Something went wrong.</string>
 </resources>
