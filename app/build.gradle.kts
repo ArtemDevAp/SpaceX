@@ -4,13 +4,12 @@ import java.util.Properties
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("androidx.navigation.safeargs")
-    id("kotlin-kapt")
-    id("kotlinx-serialization")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
+    id("androidx.navigation.safeargs")
 }
 
 val secretPropertiesFile = rootProject.file("secret.properties")
@@ -109,9 +108,9 @@ dependencies {
 
     // hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
-    kaptAndroidTest(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     // kotlin serialization
     implementation(libs.kotlinx.serialization.json)

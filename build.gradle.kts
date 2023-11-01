@@ -1,9 +1,12 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.kotlin.serialization)
-    id("io.gitlab.arturbosch.detekt") version "1.21.0"
-    id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.hilt.android) apply false
 }
 
 buildscript {
@@ -13,26 +16,24 @@ buildscript {
     }
 
     dependencies {
-        classpath(libs.android.agp)
-        classpath(libs.kotlin.gradlePlugin)
         classpath(libs.navigation.safe.args.gradle.plugin)
-        classpath(libs.hilt.android.gradle.plugin)
     }
 }
 
+val detectVersion = libs.versions.detekt.version.toString()
 subprojects {
     apply {
         plugin("io.gitlab.arturbosch.detekt")
         plugin("org.jlleitschuh.gradle.ktlint")
     }
-
     detekt {
-        toolVersion = "1.21.0"
+        toolVersion = detectVersion
         config.from(rootProject.files("config/detekt/detekt.yml"))
     }
 }
 
 typealias DetektCreateBaselineTask = io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+
 val detektProjectBaseline by tasks.registering(DetektCreateBaselineTask::class) {
     description = "Ovveride current baseline."
     buildUponDefaultConfig.set(true)
