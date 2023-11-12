@@ -40,4 +40,3 @@ class ConnectivityServiceImpl @Inject constructor(
             ?: false
     }
 }
-
