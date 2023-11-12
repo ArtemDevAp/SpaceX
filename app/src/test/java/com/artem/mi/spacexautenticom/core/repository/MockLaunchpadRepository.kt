@@ -1,15 +1,15 @@
 package com.artem.mi.spacexautenticom.core.repository
 
-import com.artem.mi.spacexautenticom.model.ApiResponse
-import com.artem.mi.spacexautenticom.model.ErrorResponse
-import com.artem.mi.spacexautenticom.model.LaunchpadData
-import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
-import com.artem.mi.spacexautenticom.repository.LaunchpadRepository
+import com.artem.mi.spacexautenticom.domain.core.SPXResult
+import com.artem.mi.spacexautenticom.data.network.ErrorResponse
+import com.artem.mi.spacexautenticom.data.network.LaunchpadData
+import com.artem.mi.spacexautenticom.data.network.LaunchpadDetailData
+import com.artem.mi.spacexautenticom.domain.launchpads.LaunchpadRepository
 
 interface MockLaunchpadRepository : LaunchpadRepository {
     override suspend fun fetchDetailLaunchpad(
         siteId: String
-    ): ApiResponse<LaunchpadDetailData, ErrorResponse> = ApiResponse.Error(ErrorResponse(""))
+    ): SPXResult<LaunchpadDetailData, ErrorResponse> = SPXResult.Error(ErrorResponse(""))
 
     override suspend fun fetchLaunchpads(): List<LaunchpadData> = emptyList()
 }

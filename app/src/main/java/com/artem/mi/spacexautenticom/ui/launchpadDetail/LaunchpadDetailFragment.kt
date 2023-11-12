@@ -7,8 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import com.artem.mi.spacexautenticom.R
 import com.artem.mi.spacexautenticom.databinding.LaunchpadDetailFragmentBinding
-import com.artem.mi.spacexautenticom.ui.common.collectWithLifecycleState
-import com.artem.mi.spacexautenticom.ui.common.viewBinding
+import com.artem.mi.spacexautenticom.ui.core.collectWithLifecycleState
+import com.artem.mi.spacexautenticom.ui.core.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 

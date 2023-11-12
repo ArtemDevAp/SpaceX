@@ -9,9 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import com.artem.mi.spacexautenticom.R
 import com.artem.mi.spacexautenticom.databinding.LauchpadFragmentBinding
-import com.artem.mi.spacexautenticom.ui.common.ClickListener
-import com.artem.mi.spacexautenticom.ui.common.collectWithLifecycleState
-import com.artem.mi.spacexautenticom.ui.common.viewBinding
+import com.artem.mi.spacexautenticom.ui.core.ClickListener
+import com.artem.mi.spacexautenticom.ui.core.collectWithLifecycleState
+import com.artem.mi.spacexautenticom.ui.core.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

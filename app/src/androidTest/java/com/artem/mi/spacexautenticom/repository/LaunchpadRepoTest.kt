@@ -3,6 +3,7 @@ package com.artem.mi.spacexautenticom.repository
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.espresso.IdlingRegistry
 import com.artem.mi.spacexautenticom.FileReader
+import com.artem.mi.spacexautenticom.domain.launchpads.LaunchpadRepository
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

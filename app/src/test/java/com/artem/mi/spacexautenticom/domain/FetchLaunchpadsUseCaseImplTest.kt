@@ -1,11 +1,14 @@
 package com.artem.mi.spacexautenticom.domain
 
-import com.artem.mi.spacexautenticom.cache.LaunchpadCache
+import com.artem.mi.spacexautenticom.data.cache.LaunchpadCache
 import com.artem.mi.spacexautenticom.core.network.FakeConnectivityService
 import com.artem.mi.spacexautenticom.core.repository.FakeFetchLaunchpadsRepository
 import com.artem.mi.spacexautenticom.core.spaceXTest
 import com.artem.mi.spacexautenticom.core.spexception.SpaceXTestException
-import com.artem.mi.spacexautenticom.model.LaunchpadData
+import com.artem.mi.spacexautenticom.data.network.LaunchpadData
+import com.artem.mi.spacexautenticom.domain.launchpads.FetchLaunchpadsUseCase
+import com.artem.mi.spacexautenticom.domain.launchpads.FetchLaunchpadsUseCaseImpl
+import com.artem.mi.spacexautenticom.domain.launchpads.Launchpads
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals

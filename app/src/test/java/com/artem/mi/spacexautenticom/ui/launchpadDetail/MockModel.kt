@@ -1,7 +1,7 @@
 package com.artem.mi.spacexautenticom.ui.launchpadDetail
 
-import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
-import com.artem.mi.spacexautenticom.model.Location
+import com.artem.mi.spacexautenticom.data.network.LaunchpadDetailData
+import com.artem.mi.spacexautenticom.data.network.Location
 
 val location = Location(
     name = "",

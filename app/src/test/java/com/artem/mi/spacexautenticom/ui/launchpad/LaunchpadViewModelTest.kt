@@ -5,8 +5,8 @@ import com.artem.mi.spacexautenticom.core.MainDispatcherRule
 import com.artem.mi.spacexautenticom.core.domain.FakeFetchLaunchpadsUseCase
 import com.artem.mi.spacexautenticom.core.domain.FakeLaunchpadState
 import com.artem.mi.spacexautenticom.core.spaceXTest
-import com.artem.mi.spacexautenticom.domain.Launchpads
-import com.artem.mi.spacexautenticom.model.LaunchpadData
+import com.artem.mi.spacexautenticom.domain.launchpads.Launchpads
+import com.artem.mi.spacexautenticom.data.network.LaunchpadData
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.test.runTest

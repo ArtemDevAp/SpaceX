@@ -1,7 +1,7 @@
 package com.artem.mi.spacexautenticom.core.domain
 
-import com.artem.mi.spacexautenticom.domain.FetchLaunchpadsUseCase
-import com.artem.mi.spacexautenticom.domain.Launchpads
+import com.artem.mi.spacexautenticom.domain.launchpads.FetchLaunchpadsUseCase
+import com.artem.mi.spacexautenticom.domain.launchpads.Launchpads
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

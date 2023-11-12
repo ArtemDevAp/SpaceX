@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.artem.mi.spacexautenticom.databinding.LaunchpadItemBinding
-import com.artem.mi.spacexautenticom.model.LaunchpadData
-import com.artem.mi.spacexautenticom.ui.common.ClickListener
+import com.artem.mi.spacexautenticom.data.network.LaunchpadData
+import com.artem.mi.spacexautenticom.ui.core.ClickListener
 
 class LaunchpadAdapter(
     private val onItemSelect: ClickListener<String>

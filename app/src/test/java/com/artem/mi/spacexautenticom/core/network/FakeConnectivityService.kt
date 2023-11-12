@@ -1,6 +1,6 @@
 package com.artem.mi.spacexautenticom.core.network
 
-import com.artem.mi.spacexautenticom.network.ConnectivityService
+import com.artem.mi.spacexautenticom.domain.services.ConnectivityService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 

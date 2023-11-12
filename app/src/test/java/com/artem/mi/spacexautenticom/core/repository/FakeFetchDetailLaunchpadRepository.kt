@@ -1,18 +1,18 @@
 package com.artem.mi.spacexautenticom.core.repository
 
-import com.artem.mi.spacexautenticom.model.ApiResponse
-import com.artem.mi.spacexautenticom.model.ErrorResponse
-import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
+import com.artem.mi.spacexautenticom.domain.core.SPXResult
+import com.artem.mi.spacexautenticom.data.network.ErrorResponse
+import com.artem.mi.spacexautenticom.data.network.LaunchpadDetailData
 
 class FakeFetchDetailLaunchpadRepository : MockLaunchpadRepository {
 
-    private var detailLaunchpad: ApiResponse<LaunchpadDetailData, ErrorResponse>? = null
+    private var detailLaunchpad: SPXResult<LaunchpadDetailData, ErrorResponse>? = null
 
-    override suspend fun fetchDetailLaunchpad(siteId: String): ApiResponse<LaunchpadDetailData, ErrorResponse> {
+    override suspend fun fetchDetailLaunchpad(siteId: String): SPXResult<LaunchpadDetailData, ErrorResponse> {
         return detailLaunchpad!!
     }
 
-    fun setDetailLaunchpad(input: ApiResponse<LaunchpadDetailData, ErrorResponse>) {
+    fun setDetailLaunchpad(input: SPXResult<LaunchpadDetailData, ErrorResponse>) {
         detailLaunchpad = input
     }
 }

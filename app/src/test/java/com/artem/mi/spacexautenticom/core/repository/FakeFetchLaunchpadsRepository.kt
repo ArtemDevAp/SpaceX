@@ -1,7 +1,7 @@
 package com.artem.mi.spacexautenticom.core.repository
 
 import com.artem.mi.spacexautenticom.core.spexception.SpaceXTestException
-import com.artem.mi.spacexautenticom.model.LaunchpadData
+import com.artem.mi.spacexautenticom.data.network.LaunchpadData
 
 class FakeFetchLaunchpadsRepository : MockLaunchpadRepository {
 
