@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.artem.mi.spacexautenticom.model.LaunchpadData
+import com.artem.mi.spacexautenticom.data.network.LaunchpadData
 import com.google.android.material.progressindicator.CircularProgressIndicator
 
 sealed interface LaunchpadUi {

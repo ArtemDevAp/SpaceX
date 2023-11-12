@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artem.mi.spacexautenticom.R
 import com.artem.mi.spacexautenticom.core.throttleLatest
-import com.artem.mi.spacexautenticom.domain.FetchLaunchpadsUseCase
+import com.artem.mi.spacexautenticom.domain.launchpads.FetchLaunchpadsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.SharingStarted

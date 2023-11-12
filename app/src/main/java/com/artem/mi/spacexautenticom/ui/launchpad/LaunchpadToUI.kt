@@ -1,7 +1,7 @@
 package com.artem.mi.spacexautenticom.ui.launchpad
 
 import com.artem.mi.spacexautenticom.R
-import com.artem.mi.spacexautenticom.domain.Launchpads
+import com.artem.mi.spacexautenticom.domain.launchpads.Launchpads
 import javax.inject.Inject
 
 class LaunchpadToUI @Inject constructor() {

@@ -1,20 +1,20 @@
 package com.artem.mi.spacexautenticom.ui.launchpadDetail
 
 import com.artem.mi.spacexautenticom.core.Mapper
-import com.artem.mi.spacexautenticom.model.ApiResponse
-import com.artem.mi.spacexautenticom.model.ErrorResponse
-import com.artem.mi.spacexautenticom.model.LaunchpadDetailData
+import com.artem.mi.spacexautenticom.data.network.ErrorResponse
+import com.artem.mi.spacexautenticom.data.network.LaunchpadDetailData
+import com.artem.mi.spacexautenticom.domain.core.SPXResult
 import javax.inject.Inject
 
 interface LaunchpadDetailUiMapper :
-    Mapper<ApiResponse<LaunchpadDetailData, ErrorResponse>, LaunchpadViewState>
+    Mapper<SPXResult<LaunchpadDetailData, ErrorResponse>, LaunchpadViewState>
 
 class LaunchpadDetailUiMapperImpl @Inject constructor() : LaunchpadDetailUiMapper {
 
-    override fun map(input: ApiResponse<LaunchpadDetailData, ErrorResponse>): LaunchpadViewState {
+    override fun map(input: SPXResult<LaunchpadDetailData, ErrorResponse>): LaunchpadViewState {
         return when (input) {
-            is ApiResponse.Success -> input.data.handleSuccess()
-            is ApiResponse.Error -> LaunchpadViewState.Error
+            is SPXResult.Success -> input.data.handleSuccess()
+            is SPXResult.Error -> LaunchpadViewState.Error
         }
     }
 

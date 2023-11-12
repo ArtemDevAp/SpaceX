@@ -3,8 +3,8 @@ package com.artem.mi.spacexautenticom.ui.launchpadDetail
 import androidx.lifecycle.SavedStateHandle
 import com.artem.mi.spacexautenticom.core.MainDispatcherRule
 import com.artem.mi.spacexautenticom.core.repository.FakeFetchDetailLaunchpadRepository
-import com.artem.mi.spacexautenticom.model.ApiResponse
-import com.artem.mi.spacexautenticom.model.Location
+import com.artem.mi.spacexautenticom.domain.core.SPXResult
+import com.artem.mi.spacexautenticom.data.network.Location
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Assert.assertEquals
@@ -43,7 +43,7 @@ class LaunchpadDetailViewModelTest {
         runTest {
             // Given
             val launchpadDetailViewModel = provideViewModel("1")
-            launchpadsRepository.setDetailLaunchpad(ApiResponse.Success(launchpadDetail))
+            launchpadsRepository.setDetailLaunchpad(SPXResult.Success(launchpadDetail))
 
             // When
             launchpadDetailViewModel.init(true)
@@ -64,7 +64,7 @@ class LaunchpadDetailViewModelTest {
         runTest {
             // Given
             val launchpadDetailViewModel = provideViewModel(null)
-            launchpadsRepository.setDetailLaunchpad(ApiResponse.Success(launchpadDetail))
+            launchpadsRepository.setDetailLaunchpad(SPXResult.Success(launchpadDetail))
 
             // When
             launchpadDetailViewModel.init(true)
